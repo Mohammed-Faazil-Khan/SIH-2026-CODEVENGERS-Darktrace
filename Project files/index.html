@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>DARKTRACE — Live Preview</title>
+<link rel="icon" type="image/png" href="assets/favicon.png"/>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div id="glow"></div>
+<div id="floatAvatar" class="float-avatar">
+  <div id="faChat" class="fa-chat">
+    <div class="fa-chat-head">DARKTRACE ASSISTANT <span><span class="fa-close" onclick="event.stopPropagation();clickSound();render('overview')" title="Back to dashboard" style="margin-right:10px">🏠</span><span class="fa-close" onclick="event.stopPropagation();toggleChat(false)">✕</span></span></div>
+    <div id="faMessages" class="fa-messages"></div>
+    <div class="fa-inputrow" onclick="event.stopPropagation()">
+      <input id="faInput" class="mono" placeholder="Ask me something…" onkeydown="if(event.key==='Enter')sendFaMessage()"/>
+      <button onclick="sendFaMessage()">➤</button>
+    </div>
+  </div>
+  <svg viewBox="0 0 64 64" width="52" height="52" onclick="pokeFloatAvatar()">
+    <circle cx="32" cy="32" r="30" fill="#12151f" stroke="var(--blue)" stroke-width="2"/>
+    <circle id="faPupilL" cx="24" cy="30" r="4.2" fill="var(--blue)"/>
+    <circle id="faPupilR" cx="40" cy="30" r="4.2" fill="var(--blue)"/>
+    <rect id="faLidL" x="18" y="24" width="12" height="0" fill="#12151f"/>
+    <rect id="faLidR" x="34" y="24" width="12" height="0" fill="#12151f"/>
+    <path id="faMouth" d="M22,42 Q32,48 42,42" stroke="var(--teal)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+  </svg>
+  <div id="faBubble" class="fa-bubble"></div>
+</div>
+
+<section id="hero">
+  <canvas id="starfield"></canvas>
+  <div class="hcontent">
+    <img src="assets/logo.png" alt="Darktrace logo" style="width:92px;height:92px;border-radius:18px;margin-bottom:22px;box-shadow:0 0 40px -6px var(--blue)"/>
+    <div class="eyebrow">THREAT INTELLIGENCE PLATFORM</div>
+    <h1 class="hero-title">DARKTRACE</h1>
+    <p class="hero-sub">Attribution, infrastructure mapping, and risk scoring across 40+ tracked actors — rebuilt with a live classifier and a real relationship graph.</p>
+    <button class="cta" onmouseenter="hoverSound()" onclick="enterConsole()">ENTER CONSOLE →</button>
+  </div>
+  <div class="scrolldown" style="cursor:pointer" onclick="enterConsole()">ENTER ↓</div>
+</section>
+
+<header id="app">
+  <div class="brand" onclick="clickSound();render('overview')" style="display:flex;align-items:center;gap:8px"><img src="assets/logo.png" alt="Darktrace logo" style="width:26px;height:26px;border-radius:6px;display:block"/>DARK<span>TRACE</span></div>
+  <button id="landingBtn" onclick="backToLanding()" title="Back to landing page">← LANDING</button>
+  <button id="dashBtn" onclick="clickSound();render('overview')" title="Back to dashboard">🏠 DASHBOARD</button>
+  <div class="searchwrap"><input id="search" list="searchOptions" placeholder="Search a handle, actor ID, or any name…" autocomplete="off"/><datalist id="searchOptions"></datalist></div>
+  <nav id="nav"></nav>
+  <button id="mute" onclick="toggleMute()" title="Toggle sound">🔊</button>
+  <button id="themeBtn" onclick="toggleTheme()" title="Toggle theme">🌙</button>
+</header>
+<main>
+  <div id="pages"></div>
+  <div id="profile"></div>
+  <div class="note">Live preview using procedurally generated synthetic actors — search any name not in the dataset to generate a deterministic profile for it (same technique the real backend uses for unresolved persona lookups).</div>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
